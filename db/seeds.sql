@@ -1,4 +1,4 @@
-use buddhism;
+use employeeTracker;
 
 INSERT INTO department
     (name)

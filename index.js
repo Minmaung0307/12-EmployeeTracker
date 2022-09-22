@@ -29,7 +29,10 @@ function runPrompts() {
           name: "View All Employees",
           value: "VIEW_EMPLOYEES",
         },
-
+        // {
+        //   name: "View All Managers",
+        //   value: "VIEW_MANAGERS",
+        // },
         {
           name: "Add a Department",
           value: "ADD_DEPARTMENT",
@@ -46,10 +49,10 @@ function runPrompts() {
           name: "Update Employee Role",
           value: "UPDATE_EMPLOYEE_ROLE",
         },
-        {
-          name: "Update an Employee",
-          value: "UPDATE_EMPLOYEE",
-        },
+        // {
+        //   name: "Update an Employee",
+        //   value: "UPDATE_EMPLOYEE",
+        // },
         {
           name: "Delete a Department",
           value: "DELETE_DEPARTMENT",
@@ -81,6 +84,9 @@ function runPrompts() {
       case "VIEW_EMPLOYEES":
         viewAllEmployees();
         break;
+      case "VIEW_MANAGERS":
+        viewAllManagers();
+        break;
       case "ADD_DEPARTMENT":
         createDepartment();
         break;
@@ -90,6 +96,9 @@ function runPrompts() {
       case "ADD_EMPLOYEE":
         createEmployee();
         break;
+      //   case "UPDATE_EMPLOYEE":
+      //     updateEmployee();
+      //     break;
       case "UPDATE_EMPLOYEE_ROLE":
         updateEmployeeRole();
         break;
@@ -140,6 +149,17 @@ function viewAllEmployees() {
     })
     .then(() => runPrompts());
 }
+
+// // View all managers
+// function viewAllManagers() {
+//   db.allManagers()
+//     .then(([rows]) => {
+//       let managers = rows;
+//       console.log("\n");
+//       console.table(managers);
+//     })
+//     .then(() => runPrompts());
+// }
 
 // Add a department
 function createDepartment() {
@@ -388,7 +408,7 @@ function updateEmployee() {
       },
     ])
       .then((res) => db.updateEmployee())
-      .then(() => console.log("Employee is updated"))
+      .then(() => console.log("Employee is successfully updated"))
       .then(() => runPrompts());
   });
 }

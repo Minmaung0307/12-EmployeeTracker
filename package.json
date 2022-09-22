@@ -1,17 +1,17 @@
 {
   "name": "employeetracker",
   "version": "1.0.0",
-  "description": "",
+  "description": "This app is about employeetracker.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Minmaung0307/-EmployeeTracker.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Min Maung",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Minmaung0307/-EmployeeTracker/issues"

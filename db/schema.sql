@@ -1,7 +1,7 @@
-DROP DATABASE IF EXISTS buddhism;
-CREATE DATABASE buddhism;
+DROP DATABASE IF EXISTS employeeTracker;
+CREATE DATABASE employeeTracker;
 
-USE buddhism;
+USE employeeTracker;
 
 CREATE TABLE department (
   id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,

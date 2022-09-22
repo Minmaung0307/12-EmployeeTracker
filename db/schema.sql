@@ -1,0 +1,27 @@
+DROP DATABASE IF EXISTS buddhism;
+CREATE DATABASE buddhism;
+
+USE buddhism;
+
+CREATE TABLE department (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE role (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(50) NOT NULL,
+  salary DECIMAL UNSIGNED NOT NULL,
+  departmentId INT UNSIGNED NOT NULL,
+  INDEX dep_ind (departmentId),
+  CONSTRAINT fk_department FOREIGN KEY (departmentId) REFERENCES department(id) ON DELETE CASCADE
+);
+
+CREATE TABLE employee (
+  id INTEGER UNSIGNED AUTO_INCREMENT,
+  firstName VARCHAR(20),
+  lastName VARCHAR (20),
+  roleId INTEGER (3),
+  managerId INTEGER (3) NULL,
+  PRIMARY KEY (id)
+);

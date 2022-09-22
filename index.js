@@ -47,6 +47,10 @@ function runPrompts() {
           value: "UPDATE_EMPLOYEE_ROLE",
         },
         {
+          name: "Update an Employee",
+          value: "UPDATE_EMPLOYEE",
+        },
+        {
           name: "Delete a Department",
           value: "DELETE_DEPARTMENT",
         },
@@ -104,13 +108,13 @@ function runPrompts() {
   });
 }
 
-// View all employees
-function viewAllEmployees() {
-  db.allEmployees()
+// View all deparments
+function viewAllDepartments() {
+  db.allDepartments()
     .then(([rows]) => {
-      let employees = rows;
+      let departments = rows;
       console.log("\n");
-      console.table(employees);
+      console.table(departments);
     })
     .then(() => runPrompts());
 }
@@ -126,15 +130,30 @@ function viewAllRoles() {
     .then(() => runPrompts());
 }
 
-// View all deparments
-function viewAllDepartments() {
-  db.allDepartments()
+// View all employees
+function viewAllEmployees() {
+  db.allEmployees()
     .then(([rows]) => {
-      let departments = rows;
+      let employees = rows;
       console.log("\n");
-      console.table(departments);
+      console.table(employees);
     })
     .then(() => runPrompts());
+}
+
+// Add a department
+function createDepartment() {
+  prompt([
+    {
+      name: "name",
+      message: "What is the name of the department?",
+    },
+  ]).then((res) => {
+    let name = res;
+    db.addDepartment(name)
+      .then(() => console.log(`Added ${name.name} to the database`))
+      .then(() => runPrompts());
+  });
 }
 
 // Add a role
@@ -164,46 +183,6 @@ function createRole() {
     ]).then((role) => {
       db.addRole(role)
         .then(() => console.log(`Added ${role.title} to the database`))
-        .then(() => runPrompts());
-    });
-  });
-}
-
-// Add a department
-function createDepartment() {
-  prompt([
-    {
-      name: "name",
-      message: "What is the name of the department?",
-    },
-  ]).then((res) => {
-    let name = res;
-    db.addDepartment(name)
-      .then(() => console.log(`Added ${name.name} to the database`))
-      .then(() => runPrompts());
-  });
-}
-
-// Delete a department
-function deleteDepartment() {
-  db.allDepartments().then(([rows]) => {
-    let departments = rows;
-    const departmentChoices = departments.map(({ id, name }) => ({
-      name: `${name}`,
-      value: id,
-    }));
-
-    prompt([
-      {
-        type: "list",
-        name: "departmentId",
-        message: "Which department would you like to delete?",
-        choices: departmentChoices,
-      },
-    ]).then((res) => {
-      let name = res.departmentId;
-      db.deleteDepartment(name)
-        .then(() => console.log("Deleted ${name.name} from the database"))
         .then(() => runPrompts());
     });
   });
@@ -275,12 +254,62 @@ function createEmployee() {
   });
 }
 
+// Delete a department
+function deleteDepartment() {
+  db.allDepartments().then(([rows]) => {
+    let departments = rows;
+    const departmentChoices = departments.map(({ id, name }) => ({
+      name: `${name}`,
+      value: id,
+    }));
+
+    prompt([
+      {
+        type: "list",
+        name: "departmentId",
+        message: "Which department would you like to delete?",
+        choices: departmentChoices,
+      },
+    ]).then((res) => {
+      let name = res.departmentId;
+      db.deleteDepartment(name)
+        .then(() => console.log("Deleted ${name.name} from the database"))
+        .then(() => runPrompts());
+    });
+  });
+}
+
+// Delete role
+function deleteRole() {
+  db.allRoles().then(([rows]) => {
+    let roles = rows;
+    const roleChoices = roles.map(({ id, title }) => ({
+      name: `${title}`,
+      value: id,
+    }));
+
+    prompt([
+      {
+        type: "list",
+        name: "roleId",
+        message: "Which role would you like to delete?",
+        choices: roleChoices,
+      },
+    ]).then((res) => {
+      let name = res.roleId;
+      db.deleteRole(name)
+        .then(() => console.log("Deleted ${name.name} from the database"))
+        .then(() => runPrompts());
+    });
+  });
+}
+
 // Delete an employee
 function deleteEmployee() {
   db.allEmployees().then(([rows]) => {
     let employees = rows;
-    const employeeChoices = employees.map(({ id, name }) => ({
-      name: `${name}`,
+    const employeeChoices = employees.map(({ id, firstName, lastName }) => ({
+      name: `${firstName} ${lastName}`,
       value: id,
     }));
 
@@ -340,6 +369,30 @@ function updateEmployeeRole() {
     });
   });
 }
+
+// Update an employee
+function updateEmployee() {
+  db.allEmployees().then(([rows]) => {
+    let employees = rows;
+    const employeeChoices = employees.map(({ id, firstName, lastName }) => ({
+      name: `${firstName} ${lastName}`,
+      value: id,
+    }));
+
+    prompt([
+      {
+        type: "list",
+        name: "employeeId",
+        message: "Which employee do you want to update?",
+        choices: employeeChoices,
+      },
+    ])
+      .then((res) => db.updateEmployee())
+      .then(() => console.log("Employee is updated"))
+      .then(() => runPrompts());
+  });
+}
+
 // Quit the application
 function quit() {
   process.exit();

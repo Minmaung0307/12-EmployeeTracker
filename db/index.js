@@ -43,6 +43,13 @@ class employeeDB {
       ]);
   }
 
+  // Update the given employee
+  updateEmployee(employeeId) {
+    return this.connection
+      .promise()
+      .query("UPDATE employee SET employeeId = ? WHERE id = ?", [employeeId]);
+  }
+
   // Update employee with manager
   updateEmployeeManager(employeeId, managerId) {
     return this.connection

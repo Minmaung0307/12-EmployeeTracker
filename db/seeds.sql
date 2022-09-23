@@ -26,7 +26,7 @@ INSERT INTO employee
 VALUES
     ('Min', 'Maung', 1, NULL),
     ('Panna', 'Siha', 2, 1),
-    ('Javana', 'Tikkha', 3, NULL),
+    ('Javana', 'Tikkha', 3, 1),
     ('Joti', 'Pala', 4, 3),
     ('Nanda', 'Marlar', 4, 3),
     ('Uttama', 'Siri', 5, NULL),

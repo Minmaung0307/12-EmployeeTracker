@@ -52,15 +52,15 @@ class employeeDB {
   
 }
 
-  // Update employee with manager
-  updateEmployeeManager(employeeId, managerId) {
-    return this.connection
-      .promise()
-      .query("UPDATE employee SET managerId = ? WHERE id = ?", [
-        managerId,
-        employeeId,
-      ]);
-  }
+  // // Update employee with manager
+  // updateEmployeeManager(employeeId, managerId) {
+  //   return this.connection
+  //     .promise()
+  //     .query("UPDATE employee SET managerId = ? WHERE id = ?", [
+  //       managerId,
+  //       employeeId,
+  //     ]);
+  // }
 
   // Show all managers
   allManagers(employeeId) {

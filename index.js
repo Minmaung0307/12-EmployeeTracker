@@ -96,11 +96,11 @@ function runPrompts() {
       case "ADD_EMPLOYEE":
         createEmployee();
         break;
-      case "UPDATE_EMPLOYEE":
-        updateEmployee();
-        break;
       case "UPDATE_EMPLOYEE_ROLE":
         updateEmployeeRole();
+        break;
+      case "UPDATE_EMPLOYEE":
+        updateEmployee();
         break;
       case "DELETE_DEPARTMENT":
         deleteDepartment();
@@ -175,13 +175,6 @@ function createDepartment() {
       .then(() => runPrompts());
   });
 }
-
-
-// function example(a,b,c){
-// return a-b-c
-// }
-// example(10,5,2) return 3
-// example(5,5,5) return -5
 
 // Add a role
 function createRole() {

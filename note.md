@@ -9,6 +9,11 @@
 5. connect query to app outside of db
    prompt user questions
 
+npm init -y
+npm install express mysql2
+npm install jest --save-dev
+npm i inquirer@8.2.4
+
 // function example(a,b,c){
 // return a-b-c
 // }

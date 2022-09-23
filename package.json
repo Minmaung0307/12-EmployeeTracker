@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -22,5 +23,8 @@
     "express": "^4.18.1",
     "inquirer": "^8.2.4",
     "mysql2": "^2.3.3"
+  },
+  "devDependencies": {
+    "jest": "^29.0.3"
   }
 }

@@ -8,3 +8,14 @@
    to create query
 5. connect query to app outside of db
    prompt user questions
+
+
+   updateEmployee(employee) {
+    return this.connection
+      .promise()
+      .query("UPDATE employee SET firstName = ?, lastName = ? WHERE id = ?", [
+        employee.firstName,
+        employee.lastName,
+        employee.id,
+      ]);
+  }

@@ -44,15 +44,13 @@ class employeeDB {
   }
 
   // Update the given employee
-  updateEmployee(employee) {
+  updateEmployee(employeeInfo) {
     return this.connection
       .promise()
-      .query("UPDATE employee SET firstName = ?, lastName = ? WHERE id = ?", [
-        employee.firstName,
-        employee.lastName,
-        employee.id,
-      ]);
-  }
+      // .query("UPDATE employee SET employeeId = ? WHERE id = ?", [employeeId]);
+      .query("UPDATE employee SET firstName = ?, lastName = ? WHERE id = ?", employeeInfo);
+  
+}
 
   // Update employee with manager
   updateEmployeeManager(employeeId, managerId) {
@@ -69,7 +67,7 @@ class employeeDB {
     return this.connection
       .promise()
       .query(
-        "SELECT id, firstName, lastName FROM employee WHERE id != ?",
+        "SELECT id, firstName, lastName FROM employee WHERE managerId IS NULL",
         employeeId
       );
   }

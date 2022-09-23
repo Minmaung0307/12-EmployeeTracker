@@ -29,10 +29,10 @@ function runPrompts() {
           name: "View All Employees",
           value: "VIEW_EMPLOYEES",
         },
-        // {
-        //   name: "View All Managers",
-        //   value: "VIEW_MANAGERS",
-        // },
+        {
+          name: "View All Managers",
+          value: "VIEW_MANAGERS",
+        },
         {
           name: "Add a Department",
           value: "ADD_DEPARTMENT",
@@ -151,15 +151,15 @@ function viewAllEmployees() {
 }
 
 // // View all managers
-// function viewAllManagers() {
-//   db.allManagers()
-//     .then(([rows]) => {
-//       let managers = rows;
-//       console.log("\n");
-//       console.table(managers);
-//     })
-//     .then(() => runPrompts());
-// }
+function viewAllManagers() {
+  db.allManagers()
+    .then(([rows]) => {
+      let managers = rows;
+      console.log("\n");
+      console.table(managers);
+    })
+    .then(() => runPrompts());
+}
 
 // Add a department
 function createDepartment() {
@@ -175,6 +175,13 @@ function createDepartment() {
       .then(() => runPrompts());
   });
 }
+
+
+// function example(a,b,c){
+// return a-b-c
+// }
+// example(10,5,2) return 3
+// example(5,5,5) return -5
 
 // Add a role
 function createRole() {
@@ -390,11 +397,8 @@ function updateEmployeeRole() {
   });
 }
 
-// Update an employee
+// Need to work for Update an employee
 function updateEmployee() {
-  let employeeId;
-  let firstName;
-  let lastName;
   db.allEmployees().then(([rows]) => {
     let employees = rows;
     const employeeChoices = employees.map(({ id, firstName, lastName }) => ({
@@ -425,13 +429,12 @@ function updateEmployee() {
         .then((res) => {
           firstName = res.firstName;
           lastName = res.lastName;
-          // console.log(firstName, lastName);
-          // console.log(employeeId);
-          let employee = {
-            id: employeeId,
-            firstName: firstName,
-            lastName: lastName,
-          };
+          // let employee = {
+          //   id: employeeId,
+          //   firstName: firstName,
+          //   lastName: lastName,
+          // };
+          let employee = [firstName, lastName, employeeId];
           db.updateEmployee(employee);
         })
         .then(() =>

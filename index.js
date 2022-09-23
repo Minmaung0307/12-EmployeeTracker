@@ -49,10 +49,10 @@ function runPrompts() {
           name: "Update Employee Role",
           value: "UPDATE_EMPLOYEE_ROLE",
         },
-        // {
-        //   name: "Update an Employee",
-        //   value: "UPDATE_EMPLOYEE",
-        // },
+        {
+          name: "Update an Employee",
+          value: "UPDATE_EMPLOYEE",
+        },
         {
           name: "Delete a Department",
           value: "DELETE_DEPARTMENT",
@@ -96,9 +96,9 @@ function runPrompts() {
       case "ADD_EMPLOYEE":
         createEmployee();
         break;
-      //   case "UPDATE_EMPLOYEE":
-      //     updateEmployee();
-      //     break;
+      case "UPDATE_EMPLOYEE":
+        updateEmployee();
+        break;
       case "UPDATE_EMPLOYEE_ROLE":
         updateEmployeeRole();
         break;
@@ -392,6 +392,9 @@ function updateEmployeeRole() {
 
 // Update an employee
 function updateEmployee() {
+  let employeeId;
+  let firstName;
+  let lastName;
   db.allEmployees().then(([rows]) => {
     let employees = rows;
     const employeeChoices = employees.map(({ id, firstName, lastName }) => ({
@@ -406,10 +409,36 @@ function updateEmployee() {
         message: "Which employee do you want to update?",
         choices: employeeChoices,
       },
-    ])
-      .then((res) => db.updateEmployee())
-      .then(() => console.log("Employee is successfully updated"))
-      .then(() => runPrompts());
+    ]).then((res) => {
+      employeeId = res.employeeId;
+
+      prompt([
+        {
+          name: "firstName",
+          message: "What's the employee's first name?",
+        },
+        {
+          name: "lastName",
+          message: "What's the employee's last name?",
+        },
+      ])
+        .then((res) => {
+          firstName = res.firstName;
+          lastName = res.lastName;
+          // console.log(firstName, lastName);
+          // console.log(employeeId);
+          let employee = {
+            id: employeeId,
+            firstName: firstName,
+            lastName: lastName,
+          };
+          db.updateEmployee(employee);
+        })
+        .then(() =>
+          console.log(`Updated ${firstName} ${lastName} to the database`)
+        )
+        .then(() => runPrompts());
+    });
   });
 }
 

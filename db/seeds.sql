@@ -12,14 +12,14 @@ VALUES
 INSERT INTO role
     (title, salary, departmentId)
 VALUES
-    ('Reader', 100000, 1),
+    ('Reader', 10000, 1),
     ('Professor', 50000, 1),
-    ('Tutor', 140000, 2),
-    ('Counselor', 65000, 2),
-    ('Instructor', 195000, 3),
-    ('Manager', 100000, 3),
-    ('Rector', 110000, 4),
-    ('Chancellor', 90000, 5);
+    ('Tutor', 14000, 2),
+    ('Counselor', 25000, 2),
+    ('Instructor', 49500, 3),
+    ('Manager', 30000, 3),
+    ('Rector', 31000, 4),
+    ('Chancellor', 51000, 5);
 
 INSERT INTO employee
     (firstName, lastName, roleId, managerId)

@@ -4,7 +4,7 @@
   "description": "This app is about employeetracker.",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
     "start": "node index.js"
   },
   "repository": {
